@@ -15,7 +15,7 @@
         :options="{
           threshold: 0,
           root: $refs.datesWrapper,
-          rootMargin: `0px 0px 0px ${itemWidth}px`,
+          rootMargin: `0px 0px 0px -${itemWidth}px`,
         }"
       />
       <li
@@ -30,19 +30,19 @@
         }"
         @click.stop="dateClickHandler(date.date)"
       >
-        <p class="date-item__year">{{ date.year }}</p>
+        <p v-if="showYear" class="date-item__year">{{ date.year }}</p>
 
-        <p class="date-item__month">{{ date.month }}</p>
+        <p v-if="showMonth" class="date-item__month">{{ date.month }}</p>
 
         <h2 class="date-item__day">{{ date.day }}</h2>
 
-        <p class="date-item__weekday">{{ date.weekday }}</p>
+        <p v-if="showWeekday" class="date-item__weekday">{{ date.weekday }}</p>
       </li>
       <the-observer
         v-if="showLastObserver"
         class="inline-calendar__date date-item"
         @intersect="getNextDatesInRange(maxDate, daysRange, true)"
-        :options="{ threshold: 0, root: $refs.datesWrapper, rootMargin: `0px ${itemWidth}px 0px 0px` }"
+        :options="{ threshold: 0, root: $refs.datesWrapper, rootMargin: `0px -${itemWidth}px 0px 0px` }"
       />
     </ul>
   </div>
@@ -108,6 +108,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    showYear: {
+      type: Boolean,
+      default: true,
+    },
+    showMonth: {
+      type: Boolean,
+      default: true,
+    },
+    showWeekday: {
+      type: Boolean,
+      default: true,
+    },
+    enableMousewheelScroll: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -127,14 +143,16 @@ export default {
     // adding calendar scroll on mousewheel
     const datesWrapperEl = this.$refs.datesWrapper;
 
-    datesWrapperEl.addEventListener("wheel", e => {
-      e.preventDefault();
+    if (this.enableMouseWheelScroll) {
+      datesWrapperEl.addEventListener("wheel", e => {
+        e.preventDefault();
 
-      datesWrapperEl.scrollBy({
-        left: (e.deltaY < 0 ? -this.itemWidth : this.itemWidth) * this.scrollSpeed,
-        behavior: "smooth",
+        datesWrapperEl.scrollBy({
+          left: (e.deltaY < 0 ? -this.itemWidth : this.itemWidth) * this.scrollSpeed,
+          behavior: "smooth",
+        });
       });
-    });
+    }
 
     window.addEventListener("resize", this.onResize);
 
@@ -150,13 +168,19 @@ export default {
     });
   },
   watch: {
+    $props: {
+      immediate: true,
+      handler() {
+        this.validateMinMaxDates();
+      },
+    },
     windowWidth: {
       handler(newVal, oldVal) {
         if (oldVal > newVal) {
           return;
         }
 
-        this.fillCalendar(false);
+        this.fillCalendar();
       },
     },
   },
@@ -199,8 +223,8 @@ export default {
       }
 
       const rangeInitial = Math.ceil(this.windowWidth / ((this.itemWidth - this.itemsGap) * 2));
-      this.getNextDatesInRange(this.today, rangeInitial, false);
-      this.getPrevDatesInRange(this.today, rangeInitial, true);
+      this.getNextDatesInRange(new Date(), rangeInitial, false);
+      this.getPrevDatesInRange(new Date(), rangeInitial, true);
     },
     getPrevDatesInRange(startDate, days, excludeFirstDate = false) {
       const date = new Date(startDate.getTime());
@@ -277,7 +301,7 @@ export default {
       }
 
       this.selectedDate = date;
-      this.$emit("set-active-date", date);
+      this.$emit("select-date", date);
     },
     setStartDate(date) {
       if (!this.canSelectDate) {
@@ -302,6 +326,8 @@ export default {
       if (this.startDate > this.endDate) {
         [this.startDate, this.endDate] = [this.endDate, this.startDate];
       }
+
+      this.$emit("select-dates-range", { startDate: this.startDate, endDate: this.endDate });
     },
     enableDateSelection() {
       setTimeout(() => {
@@ -318,11 +344,20 @@ export default {
     onResize() {
       this.windowWidth = window.innerWidth;
     },
+    validateMinMaxDates() {
+      if (this.minDate > this.maxDate || this.maxDate < this.minDate) {
+        console.error("Invalid props");
+      }
+
+      return true;
+    },
   },
   beforeDestroy() {
-    const datesWrapperEl = this.$refs.datesWrapper;
+    if (this.enableMouseWheelScroll) {
+      const datesWrapperEl = this.$refs.datesWrapper;
+      datesWrapperEl.replaceWith(datesWrapperEl.cloneNode(true));
+    }
 
-    datesWrapperEl.replaceWith(datesWrapperEl.cloneNode(true));
     window.removeEventListener("resize", this.onResize);
   },
 };
@@ -360,9 +395,11 @@ export default {
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
+    transition: all 0.2s ease-in-out;
 
     &.active {
       color: #fff;
+      border-color: #0094ff !important;
       background-color: #0094ff !important;
     }
 
