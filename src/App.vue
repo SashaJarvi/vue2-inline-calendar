@@ -12,26 +12,37 @@
         <p>
           You can simply select the date. <i>Selected date: {{ date }}</i>
         </p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">@select-date</span>=<span class="code__string">"setDate"</span> /&gt;</span>
+        </code>
         <vue-inline-calendar @select-date="setDate" />
       </div>
 
       <div class="calendar-wrapper">
         <p>You can specify the minimal date and thereby exclude older dates from selection:</p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">:spec-min-date</span>=<span class="code__string">"new Date()"</span> /&gt;</span>
+        </code>
         <vue-inline-calendar :spec-min-date="today" />
       </div>
 
       <div class="calendar-wrapper">
         <p>You can also specify the maximal date and thereby exclude newer dates from selection:</p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">:spec-max-date</span>=<span class="code__string">"new Date()"</span> /&gt;</span>
+        </code>
         <vue-inline-calendar :spec-max-date="today" />
       </div>
 
       <div class="calendar-wrapper">
-        <p>Finally, you can specify both minimal and maximal dates:</p>
-        <vue-inline-calendar :spec-min-date="today" :spec-max-date="dayAfterWeek" />
-      </div>
-
-      <div class="calendar-wrapper">
         <p>You can exclude weekends from selection:</p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">disable-weekends</span> /&gt;</span>
+        </code>
         <vue-inline-calendar disable-weekends />
       </div>
 
@@ -43,13 +54,33 @@
         <p>
           <i>End date: {{ endDate }}</i>
         </p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">is-range</span> <span class="code__attr">@select-dates-range</span>=<span class="code__string">"setDatesRange"</span> /&gt;</span>
+        </code>
         <vue-inline-calendar is-range @select-dates-range="setDatesRange" />
       </div>
 
       <div class="calendar-wrapper">
         <p>You can combine the different properties to get the desired result:</p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">:spec-min-date</span>=<span class="code__string">"new Date()"</span> <span class="code__attr">is-range</span> <span class="code__attr">disable-weekends</span> <span class="code__attr">:show-year</span>=<span class="code__string">"false"</span> /&gt;</span>
+        </code>
         <vue-inline-calendar :spec-min-date="today" is-range disable-weekends :show-year="false" />
       </div>
+
+      <p>
+        Read the
+        <a
+          class="calendar-link"
+          href="https://github.com/SashaJarvi/vue2-inline-calendar/blob/main/README.md"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          ><strong>docs</strong></a
+        >
+        to know more about the package usage
+      </p>
     </div>
   </div>
 </template>
@@ -113,24 +144,37 @@ export default {
 }
 
 .calendar-wrapper {
-  & + .calendar-wrapper {
-    margin-top: 40px;
-  }
+  margin-bottom: 40px;
 
   & > p {
     margin-bottom: 15px;
   }
 
-  code {
-    text-align: left;
+  .code {
+    display: block;
+    min-width: 100px;
+    max-width: 100%;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
     white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    -moz-tab-size: 4;
-    tab-size: 4;
-    -moz-hyphens: none;
-    hyphens: none;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+
+    &__tag,
+    &__name,
+    &__attr {
+      color: #2973b7;
+    }
+
+    &__string {
+      color: #42b983;
+    }
   }
+}
+
+.calendar-link {
+  color: #0094ff;
+  text-decoration: none;
 }
 </style>

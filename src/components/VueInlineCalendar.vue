@@ -143,7 +143,7 @@ export default {
     // adding calendar scroll on mousewheel
     const datesWrapperEl = this.$refs.datesWrapper;
 
-    if (this.enableMouseWheelScroll) {
+    if (this.enableMousewheelScroll) {
       datesWrapperEl.addEventListener("wheel", e => {
         e.preventDefault();
 
@@ -353,7 +353,7 @@ export default {
     },
   },
   beforeDestroy() {
-    if (this.enableMouseWheelScroll) {
+    if (this.enableMousewheelScroll) {
       const datesWrapperEl = this.$refs.datesWrapper;
       datesWrapperEl.replaceWith(datesWrapperEl.cloneNode(true));
     }
