@@ -15,6 +15,7 @@ git add -A
 git commit --allow-empty -m 'Deploy to Github Pages'
 
 # we are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f https://github.com/SashaJarvi/vue2-inline-calendar.git main:gh-pages
+git push -f git@github.com:SashaJarvi/vue2-inline-calendar.git main:gh-pages
 
 cd -
+rm -rf dist-gh
