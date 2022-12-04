@@ -4,7 +4,7 @@
   "main": "dist/vue2-inline-calendar.common.js",
   "module": "dist/vue2-inline-calendar.umd.min.js",
   "author": "Sasha Jarvi",
-  "description": "",
+  "description": "The simple, functional inline calendar component for Vue2 (version for Vue3 is in development now) based on Intersection Observer API",
   "files": [
     "dist/*"
   ],
@@ -13,6 +13,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib --name vue2-inline-calendar src/index.js",
+    "build:gh": "vue-cli-service build --dest dist-gh",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -40,5 +41,22 @@
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "vue-template-compiler": "^2.6.14"
+  },
+  "bugs": {
+    "url": "https://github.com/SashaJarvi/vue2-inline-calendar/issues"
+  },
+  "homepage": "https://github.com/SashaJarvi/vue2-inline-calendar#readme",
+  "keywords": [
+    "vue",
+    "vue-component",
+    "vue component",
+    "calendar-component",
+    "calendar component",
+    "calendar"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SashaJarvi/vue2-inline-calendar.git"
   }
 }
