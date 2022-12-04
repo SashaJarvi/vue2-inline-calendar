@@ -80,10 +80,6 @@ export default {
       type: String,
       default: "en-US",
     },
-    scrollDistance: {
-      type: Number,
-      default: 30,
-    },
     scrollSpeed: {
       type: Number,
       default: 4,
@@ -101,6 +97,10 @@ export default {
       default: null,
     },
     disablePastDays: {
+      type: Boolean,
+      default: false,
+    },
+    disableNextDays: {
       type: Boolean,
       default: false,
     },
@@ -205,7 +205,9 @@ export default {
             (this.endDate && checkSameDay(date, this.endDate)),
           ...(this.isRange && { isInRange: checkIsInRange(date, this.startDate, this.endDate) }),
           isDisabled:
-            (this.disableWeekends && checkIsWeekend(new Date(date))) || (this.disablePastDays && date < new Date()),
+            (this.disableWeekends && checkIsWeekend(new Date(date))) ||
+            (this.disablePastDays && date < new Date()) ||
+            (this.disableNextDays && date > new Date()),
         };
       });
     },

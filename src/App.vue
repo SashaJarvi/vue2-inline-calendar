@@ -72,12 +72,12 @@
 
       <p>
         Read the
-        <a
+        <as
           class="calendar-link"
           href="https://github.com/SashaJarvi/vue2-inline-calendar/blob/main/README.md"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          ><strong>docs</strong></a
+          ><strong>docs</strong></as
         >
         to know more about the package usage
       </p>
