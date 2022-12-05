@@ -46,8 +46,8 @@ export default {
 | locale                 | A string with a [BCP 47 language tag](https://www.techonthenet.com/js/language_tags.php) | String  | "en-US"       |
 | scrollSpeed            | Speed of dates scroll                                                                    | Number  | 4             |
 | disableWeekends        | Excluding weekends from selection                                                        | Boolean | false         |
-| specMinDate            | The first calendar date (dates before it will not be loaded)                             | Date    | null          |
-| specMaxDate            | The last calendar date (dates after it will not be loaded)                               | Date    | null          |
+| specMinDate            | Minimum allowed date                                                                     | Date    | null          |
+| specMaxDate            | Maximum allowed date                                                                     | Date    | null          |
 | disablePastDays        | Excluding dates before today's date from selection                                       | Boolean | false         |
 | disableNextDays        | Excluding dates after today's date from selection                                        | Boolean | false         |
 | isRange                | Setting up range mode — selection of start and end dates                                 | Boolean | false         |
