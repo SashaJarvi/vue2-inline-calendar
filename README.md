@@ -66,12 +66,10 @@ export default {
 [MIT](https://github.com/SashaJarvi/vue2-inline-calendar/blob/main/LICENSE) License
 
 ## Support the author
-If you would like to support me and my work, you can make a donation in the following ways:
+If you would like to support me and my work, you can make a donation via Buy Me a Coffee (link at the section Sponsor this project) or with cryptocurrency:
 
-[Buy Me a Coffee](https://www.buymeacoffee.com/sashajarvi)
-
-Bitcoin: bc1q0rygfalnctew4cla3ed9wfw2pv0uh4r0eyfuag
-
-Litecoin: ltc1qdgs0jult63k6ggjzaedh3er2z7w70aktl5j2wu
-
-Ethereum/Tether USDT (TRC20): 0x38b3822213c6BDCc01eF770442F5BF0842AB740f
+|           Platform           |                    Address                    |
+|:----------------------------:|:---------------------------------------------:|
+|           Bitcoin            | `bc1q0rygfalnctew4cla3ed9wfw2pv0uh4r0eyfuag`  |
+| Ethereum/Tether USDT (TRC20) | `0x38b3822213c6BDCc01eF770442F5BF0842AB740f`  |
+|           Litecoin           | `ltc1qdgs0jult63k6ggjzaedh3er2z7w70aktl5j2wu` |
