@@ -399,7 +399,7 @@ export default {
   }
 
   &__date {
-    padding: 14px;
+    padding: 12px;
     text-align: center;
     background-color: #fff;
     border: 1px solid #0094ff;
@@ -427,7 +427,7 @@ export default {
     }
 
     &.disabled {
-      opacity: 0.4;
+      opacity: 0.5;
       pointer-events: none;
     }
   }
