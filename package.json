@@ -1,6 +1,6 @@
 {
   "name": "vue2-inline-calendar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/vue2-inline-calendar.common.js",
   "module": "dist/vue2-inline-calendar.umd.min.js",
   "author": "Sasha Jarvi",
@@ -11,7 +11,6 @@
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib --name vue2-inline-calendar src/index.js",
     "build:gh": "vue-cli-service build --dest dist-gh",
     "test:unit": "vue-cli-service test:unit",
