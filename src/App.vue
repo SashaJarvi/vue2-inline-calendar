@@ -20,6 +20,17 @@
       </div>
 
       <div class="calendar-wrapper">
+        <p>
+          The component with <code>enable-mousewheel-scroll</code> property. <i>Selected date: {{ date }}</i>
+        </p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">@select-date</span>=<span class="code__string">"setDate"</span> <span class="code__attr">enable-mousewheel-scroll</span> /&gt;</span>
+        </code>
+        <vue-inline-calendar @select-date="setDate" enable-mousewheel-scroll />
+      </div>
+
+      <div class="calendar-wrapper">
         <p>You can specify the minimal date and thereby exclude older dates from selection:</p>
         <code class="code">
           <!-- prettier-ignore -->
@@ -72,12 +83,12 @@
 
       <p>
         Read the
-        <as
+        <a
           class="calendar-link"
           href="https://github.com/SashaJarvi/vue2-inline-calendar/blob/main/README.md"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          ><strong>docs</strong></as
+          ><strong>docs</strong></a
         >
         to know more about the package usage
       </p>

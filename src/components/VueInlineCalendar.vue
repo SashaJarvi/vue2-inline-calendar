@@ -12,11 +12,7 @@
         v-if="showFirstObserver"
         class="inline-calendar__date date-item"
         @intersect="getPrevDatesInRange(minDate, daysRange, true)"
-        :options="{
-          threshold: 0,
-          root: $refs.datesWrapper,
-          rootMargin: `0px 0px 0px -${itemWidth}px`,
-        }"
+        :options="prevObserverOptions"
       />
       <li
         v-for="(date, index) in datesReadable"
@@ -42,7 +38,7 @@
         v-if="showLastObserver"
         class="inline-calendar__date date-item"
         @intersect="getNextDatesInRange(maxDate, daysRange, true)"
-        :options="{ threshold: 0, root: $refs.datesWrapper, rootMargin: `0px -${itemWidth}px 0px 0px` }"
+        :options="nextObserverOptions"
       />
     </ul>
   </div>
@@ -130,8 +126,8 @@ export default {
       dates: [],
       canSelectDate: true,
       selectedDate: null,
-      minDate: new Date(),
-      maxDate: new Date(),
+      minDate: null,
+      maxDate: null,
       startDate: null,
       endDate: null,
       showFirstObserver: true,
@@ -215,6 +211,20 @@ export default {
       return {
         gridAutoColumns: `${this.itemWidth}px`,
         gridColumnGap: `${this.itemsGap}px`,
+      };
+    },
+    prevObserverOptions() {
+      return {
+        threshold: 0,
+        root: this.$refs.datesWrapper,
+        rootMargin: `0px 0px 0px ${this.itemWidth}px`,
+      };
+    },
+    nextObserverOptions() {
+      return {
+        threshold: 0,
+        root: this.$refs.datesWrapper,
+        rootMargin: `0px ${this.itemWidth}px 0px 0px`,
       };
     },
   },
@@ -397,7 +407,6 @@ export default {
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
-    transition: all 0.2s ease-in-out;
 
     &.active {
       color: #fff;
