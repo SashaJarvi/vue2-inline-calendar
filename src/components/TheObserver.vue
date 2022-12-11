@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "BaseObserver",
+  name: "TheObserver",
   props: {
     options: {
       type: Object,

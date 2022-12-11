@@ -1,6 +1,6 @@
 {
   "name": "vue2-inline-calendar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/vue2-inline-calendar.common.js",
   "module": "dist/vue2-inline-calendar.umd.min.js",
   "author": "Sasha Jarvi",
