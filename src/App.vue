@@ -14,9 +14,20 @@
         </p>
         <code class="code">
           <!-- prettier-ignore -->
-          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">@select-date</span>=<span class="code__string">"setDate"</span> /&gt;</span>
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">@select-date</span>=<span class="code__string">"date = $event"</span> /&gt;</span>
         </code>
-        <vue-inline-calendar @select-date="setDate" />
+        <vue-inline-calendar @select-date="date = $event" />
+      </div>
+
+      <div class="calendar-wrapper">
+        <p>
+          You can set the initial date. <i>Selected date: {{ dateInitial }}</i>
+        </p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">:initial-date</span>=<span class="code__string">"dateInitial"</span> <span class="code__attr">@select-date</span>=<span class="code__string">"dateInitial = $event"</span> /&gt;</span>
+        </code>
+        <vue-inline-calendar :initial-date="dateInitial" @select-date="dateInitial = $event" />
       </div>
 
       <div class="calendar-wrapper">
@@ -27,7 +38,7 @@
           <!-- prettier-ignore -->
           <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">@select-date</span>=<span class="code__string">"setDate"</span> <span class="code__attr">enable-mousewheel-scroll</span> /&gt;</span>
         </code>
-        <vue-inline-calendar @select-date="setDate" enable-mousewheel-scroll />
+        <vue-inline-calendar @select-date="date = $event" enable-mousewheel-scroll />
       </div>
 
       <div class="calendar-wrapper">
@@ -67,9 +78,40 @@
         </p>
         <code class="code">
           <!-- prettier-ignore -->
-          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">is-range</span> <span class="code__attr">@select-dates-range</span>=<span class="code__string">"setDatesRange"</span> /&gt;</span>
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">is-range</span> <span class="code__attr">@select-dates-range</span>=<span class="code__string">"startDateInitial = $event.startDate; endDateInitial = $event.endDate;"</span> /&gt;</span>
         </code>
-        <vue-inline-calendar is-range @select-dates-range="setDatesRange" />
+        <vue-inline-calendar
+          is-range
+          @select-dates-range="
+            startDate = $event.startDate;
+            endDate = $event.endDate;
+          "
+        />
+      </div>
+
+      <div class="calendar-wrapper">
+        <p>You can also set up the initial range of dates.</p>
+        <p>
+          <i>Start date: {{ startDateInitial }}</i>
+        </p>
+        <p>
+          <i>End date: {{ endDateInitial }}</i>
+        </p>
+        <code class="code">
+          <!-- prettier-ignore -->
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">is-range</span> <span class="code__attr">:initial-range</span>=<span class="code__string">"{ startDate = startDateInitial, endDate = endDateInitial }"</span> <span class="code__attr">@select-dates-range</span>=<span class="code__string">"startDateInitial = $event.startDate; endDateInitial = $event.endDate;"</span> /&gt;</span>
+        </code>
+        <vue-inline-calendar
+          is-range
+          :initial-range="{
+            startDate: startDateInitial,
+            endDate: endDateInitial,
+          }"
+          @select-dates-range="
+            startDateInitial = $event.startDate;
+            endDateInitial = $event.endDate;
+          "
+        />
       </div>
 
       <div class="calendar-wrapper">
@@ -106,21 +148,14 @@ export default {
   },
   data: () => ({
     today: new Date(),
-    date: null,
+    date: new Date(),
+    dateInitial: new Date(),
     startDate: null,
     endDate: null,
+    startDateInitial: new Date(new Date().setDate(new Date().getDate() + 1)),
+    endDateInitial: new Date(new Date().setDate(new Date().getDate() + 5)),
   }),
-  computed: {
-    dayAfterWeek() {
-      const dateCopy = new Date(this.today.getTime());
-
-      return new Date(dateCopy.setDate(dateCopy.getDate() + 7));
-    },
-  },
   methods: {
-    setDate(date) {
-      this.date = date;
-    },
     setDatesRange({ startDate, endDate }) {
       this.startDate = startDate;
       this.endDate = endDate;

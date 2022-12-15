@@ -19,10 +19,10 @@
         :key="`date-item_${index}`"
         class="inline-calendar__date date-item"
         :class="{
-          active: date.isActive,
           'in-range': date.isInRange,
           today: date.isToday,
           disabled: date.isDisabled,
+          active: date.isActive,
         }"
         @click.stop="dateClickHandler(date.date)"
       >
@@ -60,6 +60,22 @@ export default {
     dragscroll,
   },
   props: {
+    initialDate: {
+      type: Date,
+      default: null,
+    },
+    initialRange: {
+      type: Object,
+      default: null,
+      validator: value => {
+        return (
+          Object.prototype.hasOwnProperty.call(value, "startDate") &&
+          Object.prototype.hasOwnProperty.call(value, "endDate") &&
+          value.startDate instanceof Date &&
+          value.endDate instanceof Date
+        );
+      },
+    },
     daysRange: {
       type: Number,
       default: 7,
@@ -125,11 +141,11 @@ export default {
     return {
       dates: [],
       canSelectDate: true,
-      selectedDate: null,
+      selectedDate: this.initialDate,
       minDate: null,
       maxDate: null,
-      startDate: null,
-      endDate: null,
+      startDate: this.initialRange?.startDate || null,
+      endDate: this.initialRange?.endDate || null,
       showFirstObserver: true,
       showLastObserver: true,
       windowWidth: window.innerWidth,
@@ -408,12 +424,6 @@ export default {
     -webkit-user-select: none;
     user-select: none;
 
-    &.active {
-      color: #fff;
-      border-color: #0094ff !important;
-      background-color: #0094ff !important;
-    }
-
     &.today {
       color: #fff;
       border-color: rgba(96, 112, 128, 0.8);
@@ -424,6 +434,12 @@ export default {
       color: #fff;
       border-color: rgba(#0094ff, 0.6) !important;
       background-color: rgba(#0094ff, 0.6) !important;
+    }
+
+    &.active {
+      color: #fff;
+      border-color: #0094ff !important;
+      background-color: #0094ff !important;
     }
 
     &.disabled {
