@@ -31,12 +31,10 @@
       </div>
 
       <div class="calendar-wrapper">
-        <p>
-          The component with <code>enable-mousewheel-scroll</code> property. <i>Selected date: {{ date }}</i>
-        </p>
+        <p>The component with <code>enable-mousewheel-scroll</code> property.</p>
         <code class="code">
           <!-- prettier-ignore -->
-          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">@select-date</span>=<span class="code__string">"setDate"</span> <span class="code__attr">enable-mousewheel-scroll</span> /&gt;</span>
+          <span class="code__tag">&lt;<span class="code__name">vue-inline-calendar</span> <span class="code__attr">@select-date</span>=<span class="code__string">"dateInitial = $event"</span> <span class="code__attr">enable-mousewheel-scroll</span> /&gt;</span>
         </code>
         <vue-inline-calendar @select-date="date = $event" enable-mousewheel-scroll />
       </div>
@@ -148,8 +146,8 @@ export default {
   },
   data: () => ({
     today: new Date(),
-    date: new Date(),
-    dateInitial: new Date(),
+    date: null,
+    dateInitial: new Date(new Date().setDate(new Date().getDate() + 1)),
     startDate: null,
     endDate: null,
     startDateInitial: new Date(new Date().setDate(new Date().getDate() + 1)),

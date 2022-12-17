@@ -184,6 +184,7 @@ export default {
       immediate: true,
       handler() {
         this.validateMinMaxDates();
+        this.validateInitialValues();
       },
     },
     windowWidth: {
@@ -373,11 +374,21 @@ export default {
       this.windowWidth = window.innerWidth;
     },
     validateMinMaxDates() {
-      if (this.minDate > this.maxDate || this.maxDate < this.minDate) {
-        console.error("Invalid props");
+      if (this.minDate > this.maxDate) {
+        console.error("minDate cannot be greater than maxDate");
       }
 
       return true;
+    },
+    validateInitialValues() {
+      if (this.isRange && this.selectedDate) {
+        console.error("You should use initialRange property with isRange");
+        return;
+      }
+
+      if (!this.isRange && this.startDate && this.endDate) {
+        console.error("You should use initialDate property with default mode");
+      }
     },
   },
   beforeDestroy() {
