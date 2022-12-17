@@ -40,6 +40,8 @@ export default {
 ## Available props
 | Prop name              | Description                                                                              | Type    | Default value |
 |------------------------|------------------------------------------------------------------------------------------|---------|---------------|
+| initialDate            | Initial selected date                                                                    | Date    | null          |
+| initialRange           | Initial selected range of dates                                                          | Date    | null          |
 | daysRange              | Number of days, which will be loaded on scroll                                           | Number  | 7             |
 | itemWidth              | Width of date element (`.date-item`)                                                     | Number  | 80            |
 | itemsGap               | Distance between date elements                                                           | Number  | 10            |
