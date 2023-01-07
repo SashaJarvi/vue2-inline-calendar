@@ -1,6 +1,6 @@
 # Vue2 Inline Calendar
 
-The simple, functional inline calendar component for Vue2 (version for Vue3 is in development now) based on Intersection Observer API — just drag and scroll to get future and past dates.
+The simple, functional inline calendar component for Vue2 (you can find the version for Vue3 [here](https://github.com/SashaJarvi/vue-inline-calendar)) based on Intersection Observer API — just drag and scroll to get future and past dates.
 
 ## Installation
 
